@@ -16,7 +16,6 @@ def main():
     mob1 = database.create_entity()
     mob2 = database.create_entity()
     wep1 = database.create_entity()
-
     # Add components
     database.add_component(wep1, Weapon())
     database.add_component(wep1, Str(10))
@@ -60,6 +59,7 @@ def main():
     game.add_system(Movement())
     game.add_system(Attack())
     game.add_system(Kill())
+    game.add_system(SpawnMob())
     game.add_system(Display())
     game.add_system(Input())
 
