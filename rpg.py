@@ -29,6 +29,8 @@ def main():
     database.add_component(player, Health(100))
     database.add_component(player, Str(10))
     database.add_component(player, Def(10))
+    database.add_component(player, Vision(10))
+    database.add_component(player, Visible())
     database.add_component(player, Equip(weapon=wep1))
 
     database.add_component(mob1, Position(x=15, y=20))
@@ -38,6 +40,7 @@ def main():
     database.add_component(mob1, Health(100))
     database.add_component(mob1, Str(15))
     database.add_component(mob1, Def(1))
+    database.add_component(mob1, Visible())
     database.add_component(mob1, Equip(weapon=wep1))
 
     database.add_component(mob2, Position(x=11, y=10))
@@ -46,6 +49,7 @@ def main():
     database.add_component(mob2, Health(100))
     database.add_component(mob2, Str(5))
     database.add_component(mob2, Def(10))
+    database.add_component(mob2, Visible())
     database.add_component(mob2, Equip(weapon=wep1))
 
 

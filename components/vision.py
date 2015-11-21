@@ -2,10 +2,14 @@ from ecs.models import Component
 
 
 class Vision(Component):
-    __slots__ = "range"
+    __slots__ = "value"
 
-    def __init__(self, range):
+    def __init__(self, value):
         """
-        range -- int, vision range
+        value -- int, vision range
         """
-        self.range = range
+        self.value = value
+
+
+class Visible(Component):
+    pass

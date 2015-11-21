@@ -2,6 +2,7 @@ from random import randint
 from ecs import System
 from ecs.exceptions import NonexistentComponentTypeForEntity
 from components import *
+from systems import getvalueor0
 
 
 class Movement(System):
@@ -31,15 +32,21 @@ class Attack(System):
                 continue
             if pos.collision(ppos):
                 # TODO cleaner way to do this
-                aiwep = self.entity_manager.component_for_entity(e, Equip).weapon
-                aiatk = self.entity_manager.component_for_entity(aiwep, Str).value
-                self.entity_manager.component_for_entity(player,
-                                                         Health).hp -= aiatk + self.entity_manager.component_for_entity(
-                    e,
-                    Str).value - self.entity_manager.component_for_entity(
-                    player, Def).value
-                pwep = self.entity_manager.component_for_entity(player, Equip).weapon
-                patk = self.entity_manager.component_for_entity(pwep, Str).value
-                self.entity_manager.component_for_entity(e,
-                                                         Health).hp -= patk + self.entity_manager.component_for_entity(
-                    player, Str).value - self.entity_manager.component_for_entity(e, Def).value
+                eman = self.entity_manager
+                try:
+                    aiwep = eman.component_for_entity(e, Equip).weapon
+                    aiatk = eman.component_for_entity(aiwep, Str).value
+                except NonexistentComponentTypeForEntity:
+                    aiatk = 0
+                eman.component_for_entity(player,
+                                          Health).hp -= aiatk + getvalueor0(eman, e, Str) - getvalueor0(
+                    eman, player, Def)
+                try:
+                    pwep = eman.component_for_entity(player, Equip).weapon
+                    patk = eman.component_for_entity(pwep, Str).value
+                except NonexistentComponentTypeForEntity:
+                    patk = 0
+                eman.component_for_entity(e,
+                                          Health).hp -= patk + getvalueor0(eman, player,
+                                                                           Str) - getvalueor0(eman, e,
+                                                                                              Def)

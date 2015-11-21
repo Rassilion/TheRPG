@@ -10,7 +10,7 @@ class Display(System):
                 name = self.entity_manager.component_for_entity(e, Name)
                 hp = self.entity_manager.component_for_entity(e, Health).hp
             except NonexistentComponentTypeForEntity:
-                print("%s has no name.", e)
                 name = e
+                hp = 0
 
             print("{} position, hp {}: {!r}".format(name.name, hp, c.pos))

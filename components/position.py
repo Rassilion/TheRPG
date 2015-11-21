@@ -18,3 +18,6 @@ class Position(Component):
             return True
         else:
             return False
+
+    def distance(self, pos):
+        return abs(self.x - pos.x) + abs(self.y - pos.y)
