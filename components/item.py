@@ -6,10 +6,7 @@ class Item(Component):
 
 
 class Weapon(Component):
-    __slots__ = "atk"
-
-    def __init__(self, atk=0):
-        self.atk = atk
+    pass
 
 
 class Equip(Component):

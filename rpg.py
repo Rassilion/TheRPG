@@ -18,7 +18,8 @@ def main():
     wep1 = database.create_entity()
 
     # Add components
-    database.add_component(wep1, Weapon(10))
+    database.add_component(wep1, Weapon())
+    database.add_component(wep1, Str(10))
     database.add_component(wep1, Name("Basic Sword"))
 
     database.add_component(player, Position(x=10, y=10))

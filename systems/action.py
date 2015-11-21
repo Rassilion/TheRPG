@@ -32,11 +32,14 @@ class Attack(System):
             if pos.collision(ppos):
                 # TODO cleaner way to do this
                 aiwep = self.entity_manager.component_for_entity(e, Equip).weapon
-                self.entity_manager.component_for_entity(player, Health).hp -= self.entity_manager.component_for_entity(
-                    aiwep, Weapon).atk + self.entity_manager.component_for_entity(e,
-                                                                                  Str).value - self.entity_manager.component_for_entity(
+                aiatk = self.entity_manager.component_for_entity(aiwep, Str).value
+                self.entity_manager.component_for_entity(player,
+                                                         Health).hp -= aiatk + self.entity_manager.component_for_entity(
+                    e,
+                    Str).value - self.entity_manager.component_for_entity(
                     player, Def).value
                 pwep = self.entity_manager.component_for_entity(player, Equip).weapon
-                self.entity_manager.component_for_entity(e, Health).hp -= self.entity_manager.component_for_entity(pwep,
-                                                                                                                   Weapon).atk + self.entity_manager.component_for_entity(
+                patk = self.entity_manager.component_for_entity(pwep, Str).value
+                self.entity_manager.component_for_entity(e,
+                                                         Health).hp -= patk + self.entity_manager.component_for_entity(
                     player, Str).value - self.entity_manager.component_for_entity(e, Def).value
