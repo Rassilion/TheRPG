@@ -2,6 +2,7 @@ from random import randint
 from ecs import System
 from ecs.exceptions import NonexistentComponentTypeForEntity
 from components import *
+from systems import Display
 
 
 class Input(System):
@@ -17,6 +18,10 @@ class Input(System):
         try:
             if input[0] == "wait":
                 pass
+            if input[0] == "cd":
+                self.system_manager.remove_system(Display)
+            if input[0] == "od":
+                self.system_manager.add_system(Display())
             if input[0] == "move":
                 if input[1] == "left":
                     pos.x -= 1
