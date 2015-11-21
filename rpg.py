@@ -26,6 +26,8 @@ def main():
     database.add_component(player, Player())
     database.add_component(player, Name("Ra"))
     database.add_component(player, Health(100))
+    database.add_component(player, Str(10))
+    database.add_component(player, Def(10))
     database.add_component(player, Equip(weapon=wep1))
 
     database.add_component(mob1, Position(x=15, y=20))
@@ -33,12 +35,16 @@ def main():
     database.add_component(mob1, AI())
     database.add_component(mob1, Name("Mob1"))
     database.add_component(mob1, Health(100))
+    database.add_component(mob1, Str(15))
+    database.add_component(mob1, Def(1))
     database.add_component(mob1, Equip(weapon=wep1))
 
     database.add_component(mob2, Position(x=11, y=10))
     database.add_component(mob2, AI())
     database.add_component(mob2, Name("Mob2"))
     database.add_component(mob2, Health(100))
+    database.add_component(mob2, Str(5))
+    database.add_component(mob2, Def(10))
     database.add_component(mob2, Equip(weapon=wep1))
 
 
@@ -48,6 +54,7 @@ def main():
     #add systems
     game.add_system(Movement())
     game.add_system(Attack())
+    game.add_system(Kill())
     game.add_system(Display())
     game.add_system(Input())
 

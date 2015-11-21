@@ -30,9 +30,13 @@ class Attack(System):
             except NonexistentComponentTypeForEntity:
                 continue
             if pos.collision(ppos):
+                # TODO cleaner way to do this
                 aiwep = self.entity_manager.component_for_entity(e, Equip).weapon
                 self.entity_manager.component_for_entity(player, Health).hp -= self.entity_manager.component_for_entity(
-                    aiwep, Weapon).atk
+                    aiwep, Weapon).atk + self.entity_manager.component_for_entity(e,
+                                                                                  Str).value - self.entity_manager.component_for_entity(
+                    player, Def).value
                 pwep = self.entity_manager.component_for_entity(player, Equip).weapon
                 self.entity_manager.component_for_entity(e, Health).hp -= self.entity_manager.component_for_entity(pwep,
-                                                                                                                   Weapon).atk
+                                                                                                                   Weapon).atk + self.entity_manager.component_for_entity(
+                    player, Str).value - self.entity_manager.component_for_entity(e, Def).value

@@ -10,3 +10,17 @@ class Health(Component):
         """
         self.hp = max_hp
         self.max_hp = max_hp
+
+
+class Str(Component):
+    __slots__ = "value"
+
+    def __init__(self, str=10):
+        self.value = str
+
+
+class Def(Component):
+    __slots__ = "value"
+
+    def __init__(self, d=10):
+        self.value = d

@@ -22,8 +22,5 @@ class Equip(Component):
 class Inventory(Component):
     __slots__ = "inv"
 
-    def __init__(self, inv={}):
+    def __init__(self, inv=1):
         self.inv = inv
-
-    def add_item(self, item):
-        self.inv.append(item)
