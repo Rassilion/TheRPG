@@ -16,6 +16,7 @@ class Str(Component):
     __slots__ = "value"
 
     def __init__(self, str=10):
+        """strength value"""
         self.value = str
 
 
@@ -23,4 +24,5 @@ class Def(Component):
     __slots__ = "value"
 
     def __init__(self, d=10):
+        """defence value"""
         self.value = d

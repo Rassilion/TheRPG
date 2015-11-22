@@ -4,6 +4,7 @@ from components import *
 
 
 class Display(System):
+    """display all entities which has position, for debug"""
     def update(self, dt):
         for e, c in self.entity_manager.pairs_for_type(Position):
             try:
