@@ -18,6 +18,7 @@ def main():
     wep1 = database.create_entity()
     # Add components
     database.add_component(wep1, Weapon())
+    database.add_component(wep1, Item())
     database.add_component(wep1, Str(10))
     database.add_component(wep1, Name("Basic Sword"))
 
@@ -26,7 +27,7 @@ def main():
     database.add_component(player, Player())
     database.add_component(player, Name("Ra"))
     database.add_component(player, Health(100))
-    database.add_component(player, Str(10))
+    database.add_component(player, Str(100))
     database.add_component(player, Def(10))
     database.add_component(player, Vision(10))
     database.add_component(player, Visible())
@@ -59,7 +60,7 @@ def main():
     game.add_system(Movement())
     game.add_system(Attack())
     game.add_system(Kill())
-    game.add_system(SpawnMob())
+    #game.add_system(SpawnMob())
     game.add_system(Display())
     game.add_system(Input())
 

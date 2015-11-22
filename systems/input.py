@@ -12,7 +12,7 @@ class Input(System):
         player, pla = next(self.entity_manager.pairs_for_type(Player))
         pos = self.entity_manager.component_for_entity(player, Position)
         phealt = self.entity_manager.component_for_entity(player, Health)
-        s = str(pos.pos)+"|"+str(phealt.hp) + "/" + str(phealt.max_hp) + "> "
+        s = str(pos.pos) + "|" + str(phealt.hp) + "/" + str(phealt.max_hp) + "> "
         input = raw_input(s)
         input = input.split()
         try:
@@ -36,6 +36,32 @@ class Input(System):
                 for e, v in self.entity_manager.pairs_for_type(Visible):
                     e_position = self.entity_manager.component_for_entity(e, Position)
                     if e_position.distance(pos) <= range:
-                        print self.entity_manager.component_for_entity(e, Name).name + " "+str(e_position.pos)
+                        print self.entity_manager.component_for_entity(e, Name).name + " " + str(e_position.pos)
+            if input[0] == "take":
+                range = self.entity_manager.component_for_entity(player, Vision).value
+                i = 1
+                list = []
+                for e, v in self.entity_manager.pairs_for_type(Item):
+                    try:
+                        e_position = self.entity_manager.component_for_entity(e, Position)
+                        if e_position.distance(pos) <= range and self.entity_manager.component_for_entity(e, Visible):
+                            list.append(e)
+                            print str(i) + ") " + self.entity_manager.component_for_entity(e, Name).name
+                            i += 1
+                    except NonexistentComponentTypeForEntity:
+                        continue
+                if len(list) == 0:
+                    print "No items near"
+                else:
+                    print "0) Take all"
+                    # TODO error handling
+                    choice = raw_input("Choice: ")
+                    # add item to inventory
+                    if choice==0:
+                        for e in list:
+                            self.entity_manager.add_component(e, Inventory)
+                    else:
+                        self.entity_manager.add_component(list[choice-1], Inventory)
+
         except IndexError:
             pass
