@@ -1,5 +1,4 @@
 from random import randint
-
 from ecs import System
 from ecs.exceptions import NonexistentComponentTypeForEntity
 from components import *
@@ -10,6 +9,16 @@ class Kill(System):
         # make copy of iterator
         for e, c in tuple(self.entity_manager.pairs_for_type(Health)):
             if c.hp <= 0:
+                # create item
+                wep1 = self.entity_manager.create_entity()
+                self.entity_manager.add_component(wep1, Item())
+                self.entity_manager.add_component(wep1, Weapon())
+                self.entity_manager.add_component(wep1, Str(10))
+                self.entity_manager.add_component(wep1, Visible())
+                pos = self.entity_manager.component_for_entity(e, Position)
+                self.entity_manager.add_component(wep1, Position(pos.x, pos.y))
+                self.entity_manager.add_component(wep1, Name("Basic Sword 2"))
+                # remove dead
                 self.entity_manager.remove_entity(e)
 
 
