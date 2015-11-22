@@ -57,11 +57,18 @@ class Input(System):
                     # TODO error handling
                     choice = raw_input("Choice: ")
                     # add item to inventory
-                    if choice==0:
+                    if choice=="0":
                         for e in list:
-                            self.entity_manager.add_component(e, Inventory)
+                            self.entity_manager.add_component(e, Inventory())
                     else:
-                        self.entity_manager.add_component(list[choice-1], Inventory)
+                        self.entity_manager.add_component(list[int(choice)-1], Inventory())
+            if input[0] == "inv":
+                i = 1
+                list = []
+                for e, v in self.entity_manager.pairs_for_type(Inventory):
+                    list.append(e)
+                    print str(i) + ") " + self.entity_manager.component_for_entity(e, Name).name
+                    i += 1
 
         except IndexError:
             pass
