@@ -38,3 +38,4 @@ class SpawnMob(System):
         eman.add_component(mob1, Str(randint(0, 20)))
         eman.add_component(mob1, Def(randint(0, 20)))
         eman.add_component(mob1, Visible())
+        eman.add_component(mob1, Vision(5))

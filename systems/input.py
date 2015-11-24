@@ -30,9 +30,9 @@ class Input(System):
                 if input[1] == "right":
                     pos.x += 1
                 if input[1] == "up":
-                    pos.y += 1
-                if input[1] == "down":
                     pos.y -= 1
+                if input[1] == "down":
+                    pos.y += 1
             # list visible entities in vision range
             if input[0] == "look":
                 # get vision range
