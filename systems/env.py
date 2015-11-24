@@ -10,6 +10,7 @@ class Kill(System):
         for e, c in tuple(self.entity_manager.pairs_for_type(Health)):
             if c.hp <= 0:
                 # create item
+                # TODO add some template for droped items
                 wep1 = self.entity_manager.create_entity()
                 self.entity_manager.add_component(wep1, Item())
                 self.entity_manager.add_component(wep1, Weapon())
@@ -23,6 +24,9 @@ class Kill(System):
 
 
 class SpawnMob(System):
+    """System for spawning random mobs"""
+
+    # TODO add some template for random mobs
     def update(self, dt):
         eman = self.entity_manager
         mob1 = eman.create_entity()

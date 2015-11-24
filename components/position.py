@@ -3,9 +3,10 @@ from ecs.models import Component
 
 
 class Position(Component):
-    """Component for position and velocity data."""
+
 
     def __init__(self, x, y):
+        """Component for position and velocity data."""
         self.x = x
         self.y = y
 

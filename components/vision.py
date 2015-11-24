@@ -12,4 +12,5 @@ class Vision(Component):
 
 
 class Visible(Component):
+    """visible identifier"""
     pass
