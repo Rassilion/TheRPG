@@ -2,20 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import time
-
 from ecs import EntityManager, SystemManager
-
 from components import *
 from systems import *
+
 
 def main():
     # Create an entity manager, a database entities and components.
     database = EntityManager()
     # Create a player entity.
     player = database.create_entity()
-    mob1 = database.create_entity()
-    mob2 = database.create_entity()
-    mob3 = database.create_entity()
     wep1 = database.create_entity()
     # Add components
     database.add_component(wep1, Weapon())
@@ -34,48 +30,29 @@ def main():
     database.add_component(player, Visible())
     database.add_component(player, Equip(weapon=wep1))
 
-    database.add_component(mob1, Position(x=15, y=20))
-    database.add_component(mob1, Velocity(1,1))
-    database.add_component(mob1, AI())
-    database.add_component(mob1, Name("Mob1"))
-    database.add_component(mob1, Health(100))
-    database.add_component(mob1, Str(15))
-    database.add_component(mob1, Def(1))
-    database.add_component(mob1, Visible())
-    database.add_component(mob1, Vision(5))
-    database.add_component(mob1, Equip(weapon=wep1))
+    pos = [Position(x=15, y=20), Position(x=11, y=10), Position(x=16, y=19)]
 
-    database.add_component(mob2, Position(x=11, y=10))
-    database.add_component(mob2, Velocity(1,1))
-    database.add_component(mob2, AI())
-    database.add_component(mob2, Name("Mob2"))
-    database.add_component(mob2, Health(100))
-    database.add_component(mob2, Str(5))
-    database.add_component(mob2, Def(10))
-    database.add_component(mob2, Visible())
-    database.add_component(mob2, Vision(5))
-    database.add_component(mob2, Equip(weapon=wep1))
-
-    database.add_component(mob3, Position(x=16, y=19))
-    database.add_component(mob3, Velocity(1,1))
-    database.add_component(mob3, AI())
-    database.add_component(mob3, Name("Mob3"))
-    database.add_component(mob3, Health(100))
-    database.add_component(mob3, Str(5))
-    database.add_component(mob3, Def(10))
-    database.add_component(mob3, Visible())
-    database.add_component(mob3, Vision(5))
-    database.add_component(mob3, Equip(weapon=wep1))
-
+    for p in pos:
+        mob1 = database.create_entity()
+        database.add_component(mob1, p)
+        database.add_component(mob1, Velocity(1, 1))
+        database.add_component(mob1, AI())
+        database.add_component(mob1, Name("Mob" + str(mob1._guid)))
+        database.add_component(mob1, Health(100))
+        database.add_component(mob1, Str(15))
+        database.add_component(mob1, Def(1))
+        database.add_component(mob1, Visible())
+        database.add_component(mob1, Vision(5))
+        database.add_component(mob1, Equip(weapon=wep1))
 
     # Create a system manager, i.e. the game world.
     game = SystemManager(database)
 
-    #add systems
+    # add systems
     game.add_system(Movement())
     game.add_system(Attack())
     game.add_system(Kill())
-    #game.add_system(SpawnMob())
+    game.add_system(SpawnMob())
     game.add_system(Display())
     game.add_system(Input())
     game.add_system(AIMove())
