@@ -46,16 +46,17 @@ class Attack(System):
                 except NonexistentComponentTypeForEntity:
                     aiatk = 0
                 # calc damage "dmg=str-target def"
-                # TODO fix def can heal
+                # player hp - monsters atk
                 eman.component_for_entity(player,
-                                          Health).hp -= aiatk + getvalueor0(eman, e, Str) - getvalueor0(
-                    eman, player, Def)
+                                          Health).decreasehealt(
+                        aiatk + getvalueor0(eman, e, Str) - getvalueor0(eman, player, Def))
+
                 try:
+                    # get player weapon
                     pwep = eman.component_for_entity(player, Equip).weapon
                     patk = eman.component_for_entity(pwep, Str).value
                 except NonexistentComponentTypeForEntity:
                     patk = 0
                 eman.component_for_entity(e,
-                                          Health).hp -= patk + getvalueor0(eman, player,
-                                                                           Str) - getvalueor0(eman, e,
-                                                                                              Def)
+                                          Health).decreasehealt(
+                        patk + getvalueor0(eman, player, Str) - getvalueor0(eman, e, Def))
