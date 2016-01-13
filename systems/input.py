@@ -83,6 +83,11 @@ class Input(System):
                     list.append(e)
                     print str(i) + ") " + self.entity_manager.component_for_entity(e, Name).name
                     i += 1
+                if len(list) == 0:
+                    print "No items in Inventory"
+                else:
+                    pass
+
 
         except IndexError:
             pass
