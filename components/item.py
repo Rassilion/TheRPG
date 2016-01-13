@@ -1,4 +1,6 @@
 from ecs.models import Component
+import stats
+from util import getvalueor0
 
 
 class Item(Component):
@@ -17,6 +19,13 @@ class Equip(Component):
     def __init__(self, weapon=None):
         """equipped items of character"""
         self.weapon = weapon
+
+    # return equiped items str value
+    def getstr(self, eman):
+        if self.weapon is None:
+            return 0
+        else:
+            return getvalueor0(eman, self.weapon, stats.Str)
 
 
 class Inventory(Component):

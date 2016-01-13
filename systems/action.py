@@ -41,8 +41,7 @@ class Attack(System):
                 eman = self.entity_manager
                 try:
                     # get AI weapon
-                    aiwep = eman.component_for_entity(e, Equip).weapon
-                    aiatk = eman.component_for_entity(aiwep, Str).value
+                    aiatk = eman.component_for_entity(e, Equip).getstr(eman)
                 except NonexistentComponentTypeForEntity:
                     aiatk = 0
                 # calc damage "dmg=str-target def"
@@ -53,8 +52,7 @@ class Attack(System):
 
                 try:
                     # get player weapon
-                    pwep = eman.component_for_entity(player, Equip).weapon
-                    patk = eman.component_for_entity(pwep, Str).value
+                    patk = eman.component_for_entity(player, Equip).getstr(eman)
                 except NonexistentComponentTypeForEntity:
                     patk = 0
                 eman.component_for_entity(e,
